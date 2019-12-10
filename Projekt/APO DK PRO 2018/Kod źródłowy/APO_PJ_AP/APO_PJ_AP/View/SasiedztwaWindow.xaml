@@ -1,0 +1,118 @@
+﻿<Window x:Class="APO_PJ_AP.View.SasiedztwaWindow"
+        Name="Sasiedztwa"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:APO_PJ_AP.View"
+        xmlns:userControls="clr-namespace:APO_PJ_AP.UserControls"
+        xmlns:model="clr-namespace:APO_PJ_AP.Model"
+        xmlns:converter="clr-namespace:APO_PJ_AP.Converters"
+        mc:Ignorable="d"
+        WindowState="Maximized" 
+        Title="{Binding TitleText}" Height="1000" Width="1600">
+    <Window.Resources>
+        <converter:RadioButtonConverter x:Key="radioButtonConverter" />
+    </Window.Resources>
+    <DockPanel>
+        <Viewbox DockPanel.Dock="Top" Stretch="Uniform">
+            <Grid VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="600"/>
+                    <ColumnDefinition Width="1000"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="600"/>
+                    <RowDefinition Height="550"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Header="Obraz" Grid.Row="0" Grid.Column="1" Margin="10">
+                    <userControls:ImageUserControl SourceBitmap="{Binding ImgSourceBefore, Mode=TwoWay}"/>
+                </GroupBox>
+                <GroupBox Header="Histogram obrazu" Grid.Row="0" Grid.Column="2" Margin="10">
+                    <userControls:HistogramUserControl SourceBitmapForHistogram="{Binding ImgSourceBefore}" />
+                </GroupBox>
+                <GroupBox Header="Obraz wynikowy" Grid.Row="1" Grid.Column="1" Margin="10">
+                    <userControls:ImageUserControl SourceBitmap="{Binding ImgSourceAfter, Mode=TwoWay}"/>
+                </GroupBox>
+                <GroupBox Header="Histogram obrazu wynikowego" Grid.Row="1" Grid.Column="2" Margin="10">
+                    <userControls:HistogramUserControl SourceBitmapForHistogram="{Binding ImgSourceAfter}" />
+                </GroupBox>
+                <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="150"/>
+                        <RowDefinition Height="150"/>
+                        <RowDefinition Height="120"/>
+                        <RowDefinition Height="460"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Row="0" Grid.ColumnSpan="2">
+                        <Label Content="{Binding TitleText}" FontSize="16" Margin="10, 10, 10, 10"/>
+                    </Viewbox>
+                    <GroupBox FontSize="16" Header="Wybór koloru obrazu" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0"
+                              VerticalAlignment="Center">
+                        <StackPanel Orientation="Vertical">
+                            <RadioButton x:Name="CheckBoxRGB" IsChecked="{Binding ChkRGB}" Checked="CheckBox_Checked" Content="RGB"/>
+                            <RadioButton x:Name="CheckBoxHSV" IsChecked="{Binding ChkHSV}" Checked="CheckBox_Checked" Content="HSV"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox FontSize="16" Header="Wybór metody:" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0"
+                              VerticalAlignment="Top" Visibility="{Binding FirstComboBoxVisibility}">
+                        <ComboBox Visibility="{Binding FirstComboBoxVisibility}" ItemsSource="{Binding MaskTemplates}" SelectedIndex="{Binding SelectedIndex}" SelectedValue="{Binding SelectedItem}" SelectedValuePath="Value" DisplayMemberPath="Key" Margin="10" Height="25" SelectionChanged="ComboBox_SelectionChanged"/>
+                    </GroupBox>
+                    <GroupBox FontSize="16" Header="Wybór kierunku:" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0"
+                              VerticalAlignment="Bottom" Visibility="{Binding SecondComboBoxVisibility}">
+                        <ComboBox ItemsSource="{Binding Kierunek}" SelectedValue="{Binding SelectedItem2}" SelectedValuePath="Value" DisplayMemberPath="Key" Margin="10" Height="25"/>
+                    </GroupBox>
+                    <GroupBox FontSize="16" Header="Wybór metody skalowania:" Grid.Row="3" Grid.ColumnSpan="2"
+                              Grid.Column="0" VerticalAlignment="Top" Visibility="{Binding ScaleMethodsVisibility}">
+                        
+                        <StackPanel Orientation="Vertical">
+                            <RadioButton x:Name="ChkMetoda1" IsChecked="{Binding ChkMetoda1}" Checked="CheckBox_Checked" Content="Metoda 1"/>
+                            <RadioButton x:Name="ChkMetoda2" IsChecked="{Binding ChkMetoda2}" Checked="CheckBox_Checked" Content="Metoda 2"/>
+                            <RadioButton x:Name="ChkMetoda3" IsChecked="{Binding ChkMetoda3}" Checked="CheckBox_Checked" Content="Metoda 3"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Rodzaj maski:" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0"
+                              Visibility="{Binding MaskGroupVisibility}">
+                        <ListBox  HorizontalAlignment="Right" SelectionMode="Single" Background="Transparent" BorderThickness="0" SelectionChanged="CheckBox_Checked">
+                            <ListBoxItem>
+                                <RadioButton Content="3x3" GroupName="MaskGroup" IsChecked="{Binding Path=RadioButtonValue, Converter={StaticResource radioButtonConverter}, ConverterParameter=1}" Checked="CheckBox_Checked"/>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <RadioButton Content="3x5" IsEnabled="{Binding RadioButtonIsEnabled}" GroupName="MaskGroup" IsChecked="{Binding Path=RadioButtonValue, Converter={StaticResource radioButtonConverter}, ConverterParameter=2}" Checked="CheckBox_Checked"/>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <RadioButton Content="5x3" IsEnabled="{Binding RadioButtonIsEnabled}" GroupName="MaskGroup" IsChecked="{Binding Path=RadioButtonValue, Converter={StaticResource radioButtonConverter}, ConverterParameter=3}" Checked="CheckBox_Checked"/>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <RadioButton Content="5x5" GroupName="MaskGroup" IsChecked="{Binding Path=RadioButtonValue, Converter={StaticResource radioButtonConverter}, ConverterParameter=4}" Checked="CheckBox_Checked"/>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <RadioButton Content="7x7" GroupName="MaskGroup" IsChecked="{Binding Path=RadioButtonValue, Converter={StaticResource radioButtonConverter}, ConverterParameter=5}" Checked="CheckBox_Checked"/>
+                            </ListBoxItem>
+                        </ListBox>
+                    </GroupBox>
+                    <StackPanel Grid.Row="5"  Grid.ColumnSpan="2" Grid.Column="0">
+                        <GroupBox FontSize="16" Header="Maska 1:" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0" Visibility="{Binding FirstMask}">
+                            <DataGrid x:Name="DataGrid" ColumnWidth="30" RowHeight="30" FontSize="17" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" AutoGenerateColumns="True" IsEnabled="{Binding IsEnabled}" ItemsSource="{Binding}" DataContext="{Binding MaskDataView}" RowEditEnding="DataGrid_RowEditEnding" PreviewTextInput="DataGrid_PreviewTextInput" CanUserAddRows="False"/>
+                        </GroupBox>
+                        <GroupBox FontSize="16" Header="Maska 2:" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding SecondMask}">
+                            <DataGrid AutoGenerateColumns="True" ColumnWidth="30" RowHeight="30" FontSize="17" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="{Binding IsEnabled}" ItemsSource="{Binding}" DataContext="{Binding MaskDataView2}" RowEditEnding="DataGrid_RowEditEnding" PreviewTextInput="DataGrid_PreviewTextInput" CanUserAddRows="False"/>
+                        </GroupBox>
+                    <Button  Content="Odśwież obraz" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="125" Height="35" Command="{Binding MethodCommand}"/>
+                    </StackPanel>
+                    <Button Grid.Row="6" Grid.Column="0" Content="Zamknij" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="125" Height="35" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=Sasiedztwa}"/>
+                    <Button Grid.Row="6" Grid.Column="1" Content="Zapisz obraz wynikowy" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="125" Height="35" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=Sasiedztwa}"/>
+                </Grid>
+            </Grid>
+        </Viewbox>
+    </DockPanel>
+</Window>

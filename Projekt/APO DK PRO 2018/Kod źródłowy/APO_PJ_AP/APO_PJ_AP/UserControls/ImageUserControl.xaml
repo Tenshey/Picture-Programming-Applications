@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="APO_PJ_AP.UserControls.ImageUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             x:Name="ImageUc"
+             d:DesignHeight="600" d:DesignWidth="600" Loaded="ImageUc_Loaded">
+    <Grid>
+        <TabControl x:Name="ImageTabControl" SelectionChanged="TabControl_SelectionChanged" >
+            <TabItem Header="Obraz">
+                <ScrollViewer           
+                    x:Name="scrollViewImage"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto" >
+                    <Grid
+                        x:Name="gridImageContainer"
+                        ShowGridLines="True">
+                        <Image Grid.Row="0" Grid.Column="0" x:Name="Image"/>
+                        <Path Stroke="Aquamarine" StrokeThickness="1" x:Name="Path">
+                            <Path.Data>
+                                <RectangleGeometry/>
+                            </Path.Data>
+                        </Path>
+                        <StackPanel Margin="10"  Orientation="Horizontal" Grid.Row="0">
+                            <Button x:Name="buttonPreview" Content="Podgląd" Width="100" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="buttonPreview_Click" />
+                        </StackPanel>
+                    </Grid>
+
+                </ScrollViewer>
+                
+            </TabItem>
+            <TabItem x:Name="TableTabItem" Header="Table" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="450*"/>
+                        <RowDefinition Height="45*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid  Grid.Row="0" Name="TabelaGrid"  >
+
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <StackPanel  Margin="10"  Orientation="Horizontal">
+                            <RadioButton x:Name="RadioButtonR" IsChecked="True" Unchecked="RadioButtonRGBHSV_Checked" Checked="RadioButtonRGBHSV_Checked">Red</RadioButton>
+                            <RadioButton x:Name="RadioButtonG" Unchecked="RadioButtonRGBHSV_Checked" Checked="RadioButtonRGBHSV_Checked">Green</RadioButton>
+                            <RadioButton x:Name="RadioButtonB" Unchecked="RadioButtonRGBHSV_Checked" Checked="RadioButtonRGBHSV_Checked">Blue</RadioButton>
+                            <RadioButton x:Name="RadioButtonH" Unchecked="RadioButtonRGBHSV_Checked" Checked="RadioButtonRGBHSV_Checked">Hue</RadioButton>
+                            <RadioButton x:Name="RadioButtonS" Unchecked="RadioButtonRGBHSV_Checked" Checked="RadioButtonRGBHSV_Checked">Saturation</RadioButton>
+                            <RadioButton x:Name="RadioButtonV" Unchecked="RadioButtonRGBHSV_Checked" Checked="RadioButtonRGBHSV_Checked">Value</RadioButton>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
+
+
+

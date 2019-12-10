@@ -1,0 +1,28 @@
+﻿<Window x:Class="APO_PJ_AP.View.PreviewHistogramGrayScaleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:userControls="clr-namespace:APO_PJ_AP.UserControls"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:oxy="http://oxyplot.org/wpf"
+        mc:Ignorable="d"
+        Title="{Binding TitleText}" Height="600" Width="800">
+    <Viewbox  Stretch="Uniform">
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Margin="10" Orientation="Horizontal">
+                <RadioButton x:Name="CheckBoxSlupkowy" IsChecked="True" Checked="CheckBoxSlupkowy_Checked">Słupkowy</RadioButton>
+                <RadioButton x:Name="CheckBoxLiniowy" Checked="CheckBoxLiniowy_Checked">Liniowy</RadioButton>
+            </StackPanel>
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="800"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="580"/>
+                </Grid.RowDefinitions>
+                <oxy:PlotView  Grid.Row="0" Grid.Column="0" Margin="1" x:Name="HistPlotView" Model="{Binding HistogramModel}" />
+            </Grid>
+
+        </DockPanel>
+    </Viewbox>
+</Window>

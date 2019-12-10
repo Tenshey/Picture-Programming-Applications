@@ -1,0 +1,60 @@
+﻿<Window x:Class="APO_PJ_AP.View.WieloargumentoweWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:APO_PJ_AP.UserControls"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        
+        Title="WieloargumentoweWindow" Height="1000" Width="1600">
+    <DockPanel>
+        <Menu IsMainMenu="True" DockPanel.Dock="Top">
+            <MenuItem Header="_Plik">
+                <MenuItem Header="_Otwórz" Command="{Binding OpenImageCommand}"/>
+                <MenuItem Header="Skala szarości" Command="{Binding ConvertToGrayscaleCommand}"/>
+                <MenuItem Header="Kopiuj obraz" Command="{Binding CopyImageCommand}"/>
+                <MenuItem Header="_Zapisz" />
+                <Separator />
+                <MenuItem Header="_Exit" Command="Close"/>
+            </MenuItem>
+                    <MenuItem Header="Wieloargumentowe" >
+                        <MenuItem Header="Arytmetyczne" >
+                            <MenuItem Header="Add" Command="{Binding AddCommand}"/>
+                            <MenuItem Header="Sub" Command="{Binding SubCommand}"/>
+                            <MenuItem Header="Difference" Command="{Binding DifferenceCommand}"/>
+                        </MenuItem>
+                        <MenuItem Header="Logiczne" >
+                            <MenuItem Header="Or" Command="{Binding OrCommand}"/>
+                            <MenuItem Header="And" Command="{Binding AndCommand}"/>
+                            <MenuItem Header="Xor" Command="{Binding XorCommand}"/>
+                        </MenuItem>
+                    </MenuItem>
+            <MenuItem Header="_Pomoc"/>
+        </Menu>
+        <Viewbox Stretch="Uniform">
+            <Grid VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1000"/>
+                    <ColumnDefinition Width="1000"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="600"/>
+                    <RowDefinition Height="600"/>
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" Grid.Column="0" Header="Obraz pierwszy">
+                    <uc:ImageUserControl SourceBitmap="{Binding FirstImageBmp}"/>
+                </GroupBox>
+                <GroupBox Grid.Row="0" Grid.Column="1" Header="Obraz drugi">
+                    <uc:ImageUserControl SourceBitmap="{Binding SecondImageBmp}"/>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Grid.Column="0" Header="Obraz wynikowy">
+                    <uc:ImageUserControl SourceBitmap="{Binding ResultImageBmp}"/>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Grid.Column="1" Header="Histogram">
+                    <uc:HistogramUserControl SourceBitmapForHistogram="{Binding ResultImageBmp}"/>
+                </GroupBox>
+            </Grid>
+        </Viewbox>
+    </DockPanel>
+</Window>

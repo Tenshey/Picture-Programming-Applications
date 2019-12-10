@@ -1,0 +1,35 @@
+﻿<Window x:Class="APO_PJ_AP.View.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Height="300" Width="400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow" 
+        ShowInTaskbar="False"
+        Topmost="True" 
+        Style="{DynamicResource GREENmodModernWindow}"
+        Background="White" >
+ <Grid Margin="10 15 35 10">
+        <StackPanel>
+            <TextBlock  Margin="25 0 0 0" Text=""/>
+            <StackPanel  Margin="25 0 0 0" Orientation="Horizontal">
+                <TextBlock Text=" Nazwa: APO DK"/>
+                <TextBlock Text=""/>
+            </StackPanel>
+
+            <StackPanel  Margin="25 0 0 0">
+                <TextBlock Text="Autorzy: Daniel Kowalewski" />
+                <TextBlock Text="Wersja 1.2"/>
+                <TextBlock Text="Prowadzący: dr inż. Marek Doros"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="Projekt: Operacje na obrazach RGB i HSV. Linie profili. Wycinanie fragmentów z istniejących obrazów (RGBHSV)
+. " Height="59"/>
+                <TextBlock Text="Grupa: IZ07IO1"/>
+                <TextBlock Text="Przedmiot: Algorytmy Przetwarzania Obrazów"/>
+            </StackPanel>
+            <Border Margin="10 10 0 0" BorderThickness="0">
+                <TextBlock Padding="0,0,0,2"  VerticalAlignment="Center"  Text="" />
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>

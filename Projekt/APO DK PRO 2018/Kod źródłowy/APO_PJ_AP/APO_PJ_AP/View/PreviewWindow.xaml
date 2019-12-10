@@ -1,0 +1,28 @@
+﻿<Window x:Name="Preview" x:Class="APO_PJ_AP.View.PreviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:userControls="clr-namespace:APO_PJ_AP.UserControls"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="PreviewWindow" Height="600" Width="1000">
+    <DockPanel>
+        <Viewbox DockPanel.Dock="Top" Stretch="Uniform">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500"/>
+                    <ColumnDefinition Width="500"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="530"/>
+                    <RowDefinition Height="45*"/>
+                </Grid.RowDefinitions>
+                <userControls:ImageUserControl Grid.Column="0" SourceBitmap="{Binding SourceBitmap}" PointList="{Binding PointList, Mode=TwoWay}"/>
+                <userControls:HistogramUserControl Grid.Row="0" Grid.Column="1" SourceBitmapForHistogram="{Binding SourceBitmap}" PointList="{Binding PointList}"/>
+                <Button  Name="CloseButton" Grid.Row="1" Grid.Column="1" Content="Zamknij" HorizontalAlignment="Center" VerticalAlignment="Top" Width="125" Height="35" Margin="10" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=Preview}"/>
+                <Button Name="SaveButton" Grid.Row="1" Grid.Column="0" Content="Zapisz obraz wynikowy" HorizontalAlignment="Center" VerticalAlignment="Top" Width="125" Height="35" Margin="10" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=Preview}"/>
+
+            </Grid>
+        </Viewbox>
+    </DockPanel>
+</Window>
